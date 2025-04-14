@@ -1,208 +1,367 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PA Invasive Pests</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; }
-        .tab { cursor: pointer; padding: 10px; margin-right: 10px; background: #ddd; display: inline-block; border-radius: 5px; }
-        .tab.active { background: #aaa; }
-        .content { display: none; padding: 20px; border: 1px solid #ccc; margin-top: 10px; }
-        .content.active { display: block; }
-    </style>
-    <script>
-        function showTab(tabId) {
-            document.querySelectorAll('.content').forEach(content => content.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            document.querySelector(`[data-tab='${tabId}']`).classList.add('active');
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PA Invasive Pests</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+    }
+
+    label,
+    select {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .content {
+      display: none;
+      padding: 20px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
+
+    .content.active {
+      display: block;
+    }
+  </style>
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.content').forEach(content => content.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function handleSelectChange(select) {
+      const selectedId = select.value;
+      showTab(selectedId);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // Show the first option by default
+      const select = document.getElementById('pestSelector');
+      showTab(select.value);
+    });
+  </script>
 </head>
+
 <body>
-    <h1>Pennsylvania Invasive Pests</h1>
-    <div>
-        <span class="tab active" data-tab="adelgid" onclick="showTab('adelgid')">Hemlock Woolly Adelgid</span>
-        <span class="tab" data-tab="lanternfly" onclick="showTab('lanternfly')">Spotted Lanternfly</span>
-        <span class="tab" data-tab="blackknot" onclick="showTab('blackknot')">Black Knot</span>
-        <span class="tab" data-tab="beechbarkdisease" onclick="showTab('beechbarkdisease')">Beech Bark Disease</span>
-        <span class="tab" data-tab="oakwilt" onclick="showTab('oakwilt')">Oak Wilt</span>
-    </div>
-    
-    <div id="adelgid" class="content active">
-        <h2>Hemlock Woolly Adelgid (<em>Adelges tsugae</em>)</h2>
-        
-        <img src="images/hwa.jpg" width="500"/>        
-        
-        <h3>Identification</h3>
-        <p>Adult Hemlock Woolly Adelgids are tiny (less than 1 mm long) and appear as black or reddish-brown, oval-shaped insects. The most noticeable sign of their presence is the white, woolly masses they produce at the base of hemlock needles.</p>
-        <img src="images/hwa_crawler.jpg" width="500"/>
-        <h3>Hosts</h3>
-        <p>HWA primarily infests Eastern Hemlock (<em>Tsuga canadensis</em>) and Carolina Hemlock (<em>Tsuga caroliniana</em>), both of which are highly susceptible to infestation.</p>
-        
-        <h3>Lifecycle</h3>
-        <p>Hemlock woolly adelgids in northeastern North America are all female and reproduce asexually through parthenogenesis. Their life cycle consists of six stages: egg, four nymphal instars, and adult. There are two overlapping generations per year:</p>
-        <ul>
-            <li>The overwintering generation (sistens) is active from early summer through mid-spring, developing slowly and laying eggs in late winter to early spring.</li>
-            <li>The spring generation (progrediens) hatches in early spring and matures by mid-summer, with some individuals producing a second round of eggs.</li>
-        </ul>
-        <p>Eggs are laid in protective white woolly masses and hatch into crawlers that disperse to new growth. As they mature, they settle at the base of needles and begin feeding on stored nutrients, weakening the tree.</p>
-        <img src="images/hwa_lifecycle.jpg" width="500"/>
+  <h1>Pennsylvania Invasive Pests</h1>
 
-        <h3>Damage Signs</h3>
-        <p>Infested trees exhibit needle yellowing, premature needle drop, branch dieback, and a thinning canopy. Without intervention, trees can die within 4 to 10 years, especially in stressed environments.</p>
-        
-        <h3>Management</h3>
-        <ul>
-            <li><strong>Monitoring:</strong> Inspect the undersides of hemlock branches for white, woolly egg sacs.</li>
-            <li><strong>Cultural Controls:</strong> Maintain tree vigor through proper watering, fertilization, and pruning.</li>
-            <li><strong>Chemical Controls:</strong> Systemic insecticides, particularly imidacloprid (once per year as a soil drench) and dinotefuran (every 4 to 8 weeks during growing season), offer long-term control when applied to soil or injected into the tree.</li>
-            <li><strong>Biological Controls:</strong> Introduced predatory beetles (<em>Laricobius nigrinus</em> and <em>Sasajiscymnus tsugae</em>) have shown promise in reducing HWA populations. Timing is extremely important in this control since predatory beetles are only effective when HWA is actively feeding or breeding which makes them vulnerable.</li>
-        </ul>
-    </div>
-    
-    <div id="lanternfly" class="content">
-        <h2>Spotted Lanternfly (<em>Lycorma delicatula</em>)</h2>
-        <img src="images/slf.jpg" width="500"/>
+  <label for="pestSelector">Select a Pest:</label>
+  <select id="pestSelector" onchange="handleSelectChange(this)">
+    <option value="adelgid">Hemlock Woolly Adelgid</option>
+    <option value="lanternfly">Spotted Lanternfly</option>
+    <option value="blackknot">Black Knot</option>
+    <option value="beechbarkdisease">Beech Bark Disease</option>
+    <option value="oakwilt">Oak Wilt</option>
+  </select>
 
-        <h3>Identification</h3>
-        <p>Spotted Lanternfly adults are approximately 1 inch long and have distinctive gray forewings with black spots and bright red hindwings. Nymphs are black with white spots early in development, turning red before becoming adults.</p>
-        
-        <h3>Hosts</h3>
-        <p>The primary host is the invasive Tree of Heaven (<em>Ailanthus altissima</em>), but Spotted Lanternflies also feed on grapevines, fruit trees (apple, peach), and hardwoods (oak, maple, walnut).</p>
-        
-        <h3>Lifecycle</h3>
-        <img src="images/slf-life-cycle_web.png" width="750"/>
+  <!-- Content Sections -->
+  <div id="adelgid" class="content">
+    <h2>Hemlock Woolly Adelgid (<em>Adelges tsugae</em>)</h2>
 
-        <p>Spotted Lanternflies have one generation per year. They lay eggs in late fall on trees, rocks, vehicles, and other smooth surfaces. Eggs hatch in late spring, and nymphs go through four stages:</p>
+    <img src="images/hwa.jpg" width="500" />
 
-        <ul>
-            <li>First to third instars: Black with white spots, highly mobile.</li>
-            <li>Adults appear in midsummer, mate, and lay eggs from September through the first frost. The cycle repeats with the eggs overwintering.</li>
-        </ul>
+    <h3>Identification</h3>
+    <p>Adult Hemlock Woolly Adelgids are tiny (less than 1 mm long) and
+      appear as black or reddish-brown, oval-shaped insects. The most
+      noticeable sign of their presence is the white, woolly masses
+      they produce at the base of hemlock needles.</p>
+    <img src="images/hwa_crawler.jpg" width="500" />
+    <h3>Hosts</h3>
+    <p>HWA primarily infests Eastern Hemlock (<em>Tsuga canadensis</em>)
+      and Carolina Hemlock (<em>Tsuga caroliniana</em>), both of which
+      are highly susceptible to infestation.</p>
 
-        <h3>Damage Signs</h3>
-        <img src="images/slf_mold.jpg" width="500"/>
-        <p>Signs of infestation include egg masses on tree trunks and outdoor surfaces, excessive sap oozing from feeding sites, honeydew accumulation attracting ants and wasps, and black sooty mold covering leaves and bark.</p>
-        
-        <h3>Management</h3>
-        <ul>
-            <li><strong>Monitoring:</strong> Survey trees and surfaces for egg masses, nymphs, and adults.</li>
-            <li><strong>Cultural Controls:</strong> Remove Tree of Heaven to limit preferred host availability.</li>
-            <li><strong>Chemical Controls:</strong> Contact insecticides (bifenthrin) and systemic insecticides (dinotefuran) have shown efficacy in controlling populations.</li>
-            <li><strong>Biological Controls:</strong> Research is ongoing into natural enemies like parasitic wasps (<em>Anastatus orientalis</em>) for population management.</li>
-            <li><strong>Physical Controls:</strong> Sticky bands around trees, and manually removing egg masses can augment other control methods. Studies have shown that the insects are attracted to vibration and there may be potential to develop traps based on this tendency.</li>
-        </ul>
-    </div>
-
-     <!-- Black Knot Section -->
-    <div id="blackknot" class="content">
-        <h2>Black Knot (<em>Apiosporina morbosa</em>)</h2>
-        <img src="images/blackknot.jpg" width="500"/>
-        
-        <h3>Identification</h3>
-        <p>Black Knot is a fungal disease that causes black, swollen galls to form along branches and twigs of infected trees. The galls start as small, light brown swellings and gradually darken and expand into rough, elongated knots.</p>
-        
-        <h3>Hosts</h3>
-        <p>Black Knot primarily affects trees in the Prunus genus, including cherry (<em>Prunus serotina</em>), plum (<em>Prunus domestica</em>), apricot, and ornamental cherries.</p>
-        
-        <h3>Lifecycle</h3>
-        <p>The Black Knot fungus overwinters in the galls, releasing spores in the spring during wet conditions. These spores infect young shoots, and symptoms become visible in the following growing season. The infection spreads rapidly in humid environments.</p>
-        
-        <h3>Damage Signs</h3>
-        <p>Infected trees develop knobby, black fungal growths that girdle branches, leading to dieback and reduced fruit production. Severe infections can stunt tree growth and eventually cause tree death.</p>
-        
-        <h3>Management</h3>
-        <ul>
-            <li><strong>Pruning:</strong> Remove infected branches at least 6-8 inches below visible galls during winter while trees are dormant.</li>
-            <li><strong>Sanitation:</strong> Destroy pruned material by burning or burying to prevent fungal spread.</li>
-            <li><strong>Fungicides:</strong> Apply protective fungicides (e.g., chlorothalonil, lime sulfur) during early spring before bud break and repeat applications as necessary.</li>
-            <li><strong>Resistant Varieties:</strong> Consider planting disease-resistant varieties of Prunus species where available.</li>
-        </ul>
-    </div>
-    
-    <div id="beechbarkdisease" class="content">
-        <h2>Beech Bark Disease (<em>Cryptococcus fagisuga</em> & <em>Neonectria</em> spp.)</h2>
-        <img src="images/beechdisease.jpg" width="500"/>
-        
-        <h3>Identification</h3>
-        <p>Beech Bark Disease is a lethal disease caused by a combination of an invasive beech scale insect (<em>Cryptococcus fagisuga</em>) and fungal pathogens (<em>Neonectria</em> species). The scale insects pierce the bark, creating entry points for fungal infection, leading to cankers, bark splitting, and tree mortality.</p>
-        
-        <h3>Hosts</h3>
-        <p>The primary host is American Beech (<em>Fagus grandifolia</em>), though European Beech (<em>Fagus sylvatica</em>) can also be affected.</p>
-        
-        <h3>Lifecycle</h3>
-        <p>The disease progresses in two stages:</p>
-        <ul>
-            <li><strong>Scale Insect Infestation:</strong> The invasive beech scale insect attaches to the bark and feeds on sap, covering the tree in a white, woolly wax coating.</li>
-            <li><strong>Fungal Infection:</strong> The fungi enter through wounds, causing cankers that disrupt nutrient flow, eventually leading to tree decline and death.</li>
-        </ul>
-        
-        <h3>Damage Signs</h3>
-        <p>Infested trees exhibit the following symptoms:</p>
-        <ul>
-            <li>White woolly scale insects on bark.</li>
-            <li>Cankers, sunken areas, and bark splitting.</li>
-            <li>Dieback in the crown of the tree.</li>
-            <li>Tree mortality within a few years of severe infection.</li>
-        </ul>
-        
-        <h3>Management</h3>
-        <ul>
-            <li><strong>Monitoring:</strong> Regularly inspect beech trees for scale infestations and early signs of fungal infection.</li>
-            <li><strong>Biological Control:</strong> Natural predators, such as parasitic wasps, may help suppress scale insect populations.</li>
-            <li><strong>Chemical Treatment:</strong> Insecticidal oils (e.g., horticultural oil) can help control scale insects, while systemic fungicides may help in early-stage infections.</li>
-            <li><strong>Resistant Trees:</strong> Some beech trees exhibit natural resistance; ongoing research supports selective breeding programs.</li>
-            <li><strong>Forest Management:</strong> Removing infected trees in heavily infested areas may help slow disease spread.</li>
-        </ul>
-    </div>
-
-    <div id="oakwilt" class="content">
-        <h2>Oak Wilt (<em>Bretziella fagacearum</em>)</h2>
-        <img src="images/oak_wilt.jpg" width="500"/>
-    
-        <h3>Identification</h3>
-        <p>Oak Wilt is a serious vascular disease caused by the fungus <em>Bretziella fagacearum</em>. It rapidly kills red oaks and can also affect white oaks. The disease blocks water-conducting vessels, causing wilting and leaf drop.</p>
-    
-        <h3>Hosts</h3>
-        <p>Red oaks (e.g., <em>Quercus rubra</em>) are highly susceptible and typically die within a few weeks to months. White oaks (e.g., <em>Quercus alba</em>) are more resistant and may survive longer or even recover from mild infections.</p>
-    
-        <h3>Lifecycle</h3>
-        <ul>
-            <li>The fungus spreads underground through root grafts between adjacent oaks, especially in red oak groups.</li>
-            <li>It also spreads above ground by sap-feeding beetles (e.g., nitidulids) that carry fungal spores from infected trees to fresh wounds on healthy trees.</li>
-            <li>Fungal mats form under the bark of infected red oaks, producing spores that facilitate beetle transmission.</li>
-        </ul>
-
-        <img src="images/oak_wilt_leaves.png" width="500"/>
-
-        <h3>Damage Signs</h3>
-        <ul>
-            <li>Leaves turn dull green or bronze and wilt starting at the top of the canopy.</li>
-            <li>Premature leaf drop, often with partially green leaves falling.</li>
-            <li>In red oaks, entire trees may die within weeks. White oaks decline more slowly, showing leaf browning over several seasons.</li>
-        </ul>
-    
-        <h3>Management</h3>
-        <ul>
-            <li><strong>Root Graft Disruption:</strong> Trenching between infected and healthy trees can prevent underground spread.</li>
-            <li><strong>Sanitation:</strong> Promptly remove and destroy infected red oaks to prevent aboveground spread.</li>
-            <li><strong>Pruning Timing:</strong> Avoid pruning during growing season (especially April–July) to reduce beetle attraction.</li>
-            <li><strong>Chemical Treatment:</strong> Fungicide injections (e.g., propiconazole) can protect high-value white oaks, especially preventatively.</li>
-            <li><strong>Monitoring:</strong> Watch for rapid dieback in red oaks and notify forestry professionals promptly for diagnosis and management advice.</li>
-        </ul>
-    </div>
-
-    <h2>Sources</h2>
+    <h3>Lifecycle</h3>
+    <p>Hemlock woolly adelgids in northeastern North America are all
+      female and reproduce asexually through parthenogenesis. Their
+      life cycle consists of six stages: egg, four nymphal instars,
+      and adult. There are two overlapping generations per year:</p>
     <ul>
-        <li>Pennsylvania Department of Agriculture - <a href="https://www.agriculture.pa.gov">www.agriculture.pa.gov</a></li>
-        <li>USDA Forest Service - <a href="https://www.fs.usda.gov">www.fs.usda.gov</a></li>
-        <li>Penn State Extension - <a href="https://extension.psu.edu">extension.psu.edu</a></li>
-        <li>National Invasive Species Information Center - <a href="https://www.invasivespeciesinfo.gov">www.invasivespeciesinfo.gov</a></li>
-        <li>Maine Forest Service - <a href="https://www.maine.gov/dacf/mfs/forest_health/insects/hemlock_woolly_adelgid_life_stages.htm">www.maine.gov</a></li>
-        <li>Cornell University NYS IPM - <a href="https://cals.cornell.edu/new-york-state-integrated-pest-management/outreach-education/whats-bugging-you/spotted-lanternfly/spotted-lanternfly-biology-and-lifecycle">cals.cornell.edu</a></li>
-        <li>Minnesota DNR - <a href="https://www.dnr.state.mn.us/treecare/forest_health/oakwilt/index.html">www.dnr.state.mn.us</a></li>
+      <li>The overwintering generation (sistens) is active from early
+        summer through mid-spring, developing slowly and laying eggs
+        in late winter to early spring.</li>
+      <li>The spring generation (progrediens) hatches in early spring
+        and matures by mid-summer, with some individuals producing a
+        second round of eggs.</li>
     </ul>
+    <p>Eggs are laid in protective white woolly masses and hatch into
+      crawlers that disperse to new growth. As they mature, they
+      settle at the base of needles and begin feeding on stored
+      nutrients, weakening the tree.</p>
+    <img src="images/hwa_lifecycle.jpg" width="500" />
+
+    <h3>Damage Signs</h3>
+    <p>Infested trees exhibit needle yellowing, premature needle drop,
+      branch dieback, and a thinning canopy. Without intervention,
+      trees can die within 4 to 10 years, especially in stressed
+      environments.</p>
+
+    <h3>Management</h3>
+    <ul>
+      <li><strong>Monitoring:</strong> Inspect the undersides of
+        hemlock branches for white, woolly egg sacs.</li>
+      <li><strong>Cultural Controls:</strong> Maintain tree vigor
+        through proper watering, fertilization, and pruning.</li>
+      <li><strong>Chemical Controls:</strong> Systemic insecticides,
+        particularly imidacloprid (once per year as a soil drench)
+        and dinotefuran (every 4 to 8 weeks during growing season),
+        offer long-term control when applied to soil or injected
+        into the tree.</li>
+      <li><strong>Biological Controls:</strong> Introduced predatory
+        beetles (<em>Laricobius nigrinus</em> and <em>Sasajiscymnus
+          tsugae</em>) have shown promise in reducing HWA
+        populations. Timing is extremely important in this control
+        since predatory beetles are only effective when HWA is
+        actively feeding or breeding which makes them
+        vulnerable.</li>
+    </ul>
+  </div>
+
+  <div id="lanternfly" class="content">
+    <h2>Spotted Lanternfly (<em>Lycorma delicatula</em>)</h2>
+    <img src="images/slf.jpg" width="500" />
+
+    <h3>Identification</h3>
+    <p>Spotted Lanternfly adults are approximately 1 inch long and have
+      distinctive gray forewings with black spots and bright red
+      hindwings. Nymphs are black with white spots early in
+      development, turning red before becoming adults.</p>
+
+    <h3>Hosts</h3>
+    <p>The primary host is the invasive Tree of Heaven (<em>Ailanthus
+        altissima</em>), but Spotted Lanternflies also feed on
+      grapevines, fruit trees (apple, peach), and hardwoods (oak,
+      maple, walnut).</p>
+
+    <h3>Lifecycle</h3>
+    <img src="images/slf-life-cycle_web.png" width="750" />
+
+    <p>Spotted Lanternflies have one generation per year. They lay eggs
+      in late fall on trees, rocks, vehicles, and other smooth
+      surfaces. Eggs hatch in late spring, and nymphs go through four
+      stages:</p>
+
+    <ul>
+      <li>First to third instars: Black with white spots, highly
+        mobile.</li>
+      <li>Adults appear in midsummer, mate, and lay eggs from
+        September through the first frost. The cycle repeats with
+        the eggs overwintering.</li>
+    </ul>
+
+    <h3>Damage Signs</h3>
+    <img src="images/slf_mold.jpg" width="500" />
+    <p>Signs of infestation include egg masses on tree trunks and
+      outdoor surfaces, excessive sap oozing from feeding sites,
+      honeydew accumulation attracting ants and wasps, and black sooty
+      mold covering leaves and bark.</p>
+
+    <h3>Management</h3>
+    <ul>
+      <li><strong>Monitoring:</strong> Survey trees and surfaces for
+        egg masses, nymphs, and adults.</li>
+      <li><strong>Cultural Controls:</strong> Remove Tree of Heaven to
+        limit preferred host availability.</li>
+      <li><strong>Chemical Controls:</strong> Contact insecticides
+        (bifenthrin) and systemic insecticides (dinotefuran) have
+        shown efficacy in controlling populations.</li>
+      <li><strong>Biological Controls:</strong> Research is ongoing
+        into natural enemies like parasitic wasps (<em>Anastatus
+          orientalis</em>) for population management.</li>
+      <li><strong>Physical Controls:</strong> Sticky bands around
+        trees, and manually removing egg masses can augment other
+        control methods. Studies have shown that the insects are
+        attracted to vibration and there may be potential to develop
+        traps based on this tendency.</li>
+    </ul>
+  </div>
+
+  <div id="blackknot" class="content">
+    <h2>Black Knot (<em>Apiosporina morbosa</em>)</h2>
+    <img src="images/blackknot.jpg" width="500" />
+
+    <h3>Identification</h3>
+    <p>Black Knot is a fungal disease that causes black, swollen galls
+      to form along branches and twigs of infected trees. The galls
+      start as small, light brown swellings and gradually darken and
+      expand into rough, elongated knots.</p>
+
+    <h3>Hosts</h3>
+    <p>Black Knot primarily affects trees in the Prunus genus, including
+      cherry (<em>Prunus serotina</em>), plum (<em>Prunus
+        domestica</em>), apricot, and ornamental cherries.</p>
+
+    <h3>Lifecycle</h3>
+    <p>The Black Knot fungus overwinters in the galls, releasing spores
+      in the spring during wet conditions. These spores infect young
+      shoots, and symptoms become visible in the following growing
+      season. The infection spreads rapidly in humid environments.</p>
+
+    <h3>Damage Signs</h3>
+    <p>Infected trees develop knobby, black fungal growths that girdle
+      branches, leading to dieback and reduced fruit production.
+      Severe infections can stunt tree growth and eventually cause
+      tree death.</p>
+
+    <h3>Management</h3>
+    <ul>
+      <li><strong>Pruning:</strong> Remove infected branches at least
+        6-8 inches below visible galls during winter while trees are
+        dormant.</li>
+      <li><strong>Sanitation:</strong> Destroy pruned material by
+        burning or burying to prevent fungal spread.</li>
+      <li><strong>Fungicides:</strong> Apply protective fungicides
+        (e.g., chlorothalonil, lime sulfur) during early spring
+        before bud break and repeat applications as necessary.</li>
+      <li><strong>Resistant Varieties:</strong> Consider planting
+        disease-resistant varieties of Prunus species where
+        available.</li>
+    </ul>
+  </div>
+
+  <div id="beechbarkdisease" class="content">
+    <h2>Beech Bark Disease (<em>Cryptococcus fagisuga</em> &
+      <em>Neonectria</em> spp.)
+    </h2>
+    <img src="images/beechdisease.jpg" width="500" />
+
+    <h3>Identification</h3>
+    <p>Beech Bark Disease is a lethal disease caused by a combination of
+      an invasive beech scale insect (<em>Cryptococcus fagisuga</em>)
+      and fungal pathogens (<em>Neonectria</em> species). The scale
+      insects pierce the bark, creating entry points for fungal
+      infection, leading to cankers, bark splitting, and tree
+      mortality.</p>
+
+    <h3>Hosts</h3>
+    <p>The primary host is American Beech (<em>Fagus grandifolia</em>),
+      though European Beech (<em>Fagus sylvatica</em>) can also be
+      affected.</p>
+
+    <h3>Lifecycle</h3>
+    <p>The disease progresses in two stages:</p>
+    <ul>
+      <li><strong>Scale Insect Infestation:</strong> The invasive
+        beech scale insect attaches to the bark and feeds on sap,
+        covering the tree in a white, woolly wax coating.</li>
+      <li><strong>Fungal Infection:</strong> The fungi enter through
+        wounds, causing cankers that disrupt nutrient flow,
+        eventually leading to tree decline and death.</li>
+    </ul>
+
+    <h3>Damage Signs</h3>
+    <p>Infested trees exhibit the following symptoms:</p>
+    <ul>
+      <li>White woolly scale insects on bark.</li>
+      <li>Cankers, sunken areas, and bark splitting.</li>
+      <li>Dieback in the crown of the tree.</li>
+      <li>Tree mortality within a few years of severe infection.</li>
+    </ul>
+
+    <h3>Management</h3>
+    <ul>
+      <li><strong>Monitoring:</strong> Regularly inspect beech trees
+        for scale infestations and early signs of fungal
+        infection.</li>
+      <li><strong>Biological Control:</strong> Natural predators, such
+        as parasitic wasps, may help suppress scale insect
+        populations.</li>
+      <li><strong>Chemical Treatment:</strong> Insecticidal oils
+        (e.g., horticultural oil) can help control scale insects,
+        while systemic fungicides may help in early-stage
+        infections.</li>
+      <li><strong>Resistant Trees:</strong> Some beech trees exhibit
+        natural resistance; ongoing research supports selective
+        breeding programs.</li>
+      <li><strong>Forest Management:</strong> Removing infected trees
+        in heavily infested areas may help slow disease spread.</li>
+    </ul>
+  </div>
+
+  <div id="oakwilt" class="content">
+    <h2>Oak Wilt (<em>Bretziella fagacearum</em>)</h2>
+    <img src="images/oak_wilt.jpg" width="500" />
+
+    <h3>Identification</h3>
+    <p>Oak Wilt is a serious vascular disease caused by the fungus
+      <em>Bretziella fagacearum</em>. It rapidly kills red oaks and
+      can also affect white oaks. The disease blocks water-conducting
+      vessels, causing wilting and leaf drop.
+    </p>
+
+    <h3>Hosts</h3>
+    <p>Red oaks (e.g., <em>Quercus rubra</em>) are highly susceptible
+      and typically die within a few weeks to months. White oaks
+      (e.g., <em>Quercus alba</em>) are more resistant and may survive
+      longer or even recover from mild infections.</p>
+
+    <h3>Lifecycle</h3>
+    <ul>
+      <li>The fungus spreads underground through root grafts between
+        adjacent oaks, especially in red oak groups.</li>
+      <li>It also spreads above ground by sap-feeding beetles (e.g.,
+        nitidulids) that carry fungal spores from infected trees to
+        fresh wounds on healthy trees.</li>
+      <li>Fungal mats form under the bark of infected red oaks,
+        producing spores that facilitate beetle transmission.</li>
+    </ul>
+
+    <img src="images/oak_wilt_leaves.png" width="500" />
+
+    <h3>Damage Signs</h3>
+    <ul>
+      <li>Leaves turn dull green or bronze and wilt starting at the
+        top of the canopy.</li>
+      <li>Premature leaf drop, often with partially green leaves
+        falling.</li>
+      <li>In red oaks, entire trees may die within weeks. White oaks
+        decline more slowly, showing leaf browning over several
+        seasons.</li>
+    </ul>
+
+    <h3>Management</h3>
+    <ul>
+      <li><strong>Root Graft Disruption:</strong> Trenching between
+        infected and healthy trees can prevent underground
+        spread.</li>
+      <li><strong>Sanitation:</strong> Promptly remove and destroy
+        infected red oaks to prevent aboveground spread.</li>
+      <li><strong>Pruning Timing:</strong> Avoid pruning during
+        growing season (especially April–July) to reduce beetle
+        attraction.</li>
+      <li><strong>Chemical Treatment:</strong> Fungicide injections
+        (e.g., propiconazole) can protect high-value white oaks,
+        especially preventatively.</li>
+      <li><strong>Monitoring:</strong> Watch for rapid dieback in red
+        oaks and notify forestry professionals promptly for
+        diagnosis and management advice.</li>
+    </ul>
+  </div>
+
+  <h2>Sources</h2>
+  <ul>
+    <li>Pennsylvania Department of Agriculture - <a href="https://www.agriculture.pa.gov">www.agriculture.pa.gov</a>
+    </li>
+    <li>USDA Forest Service - <a href="https://www.fs.usda.gov">www.fs.usda.gov</a></li>
+    <li>Penn State Extension - <a href="https://extension.psu.edu">extension.psu.edu</a></li>
+    <li>National Invasive Species Information Center - <a
+        href="https://www.invasivespeciesinfo.gov">www.invasivespeciesinfo.gov</a></li>
+    <li>Maine Forest Service - <a
+        href="https://www.maine.gov/dacf/mfs/forest_health/insects/hemlock_woolly_adelgid_life_stages.htm">www.maine.gov</a>
+    </li>
+    <li>Cornell University NYS IPM - <a
+        href="https://cals.cornell.edu/new-york-state-integrated-pest-management/outreach-education/whats-bugging-you/spotted-lanternfly/spotted-lanternfly-biology-and-lifecycle">cals.cornell.edu</a>
+    </li>
+    <li>Minnesota DNR - <a
+        href="https://www.dnr.state.mn.us/treecare/forest_health/oakwilt/index.html">www.dnr.state.mn.us</a></li>
+  </ul>
 </body>
+
 </html>
